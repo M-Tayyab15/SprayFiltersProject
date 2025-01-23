@@ -1,0 +1,128 @@
+<div class="custom-filters-container">
+  <h2>Custom Filters</h2>
+  <p class="subtextheading">
+    Our custom steel holding frames and polyester filter media pads can be custom
+    made for any unit at any facility—many times at a cost less than pre-manufactured
+    options!
+  </p>
+  <div class="filter-cards" style="--cards-per-row: {{ section.settings.cards_per_row | default: 3 }};">
+    {% for block in section.blocks %}
+    <div class="filter-card">
+      {% if block.settings.icon %}
+        <img src="{{ block.settings.icon | image_url }}" alt="{{ block.settings.title }}">
+      {% endif %}
+      <h3>{{ block.settings.title }}</h3>
+      <p>{{ block.settings.description }}</p>
+    </div>
+    {% endfor %}
+  </div>
+  {% if section.settings.learn_more_link %}
+    <a class="learn-more-button" href="{{ section.settings.learn_more_link }}">
+    Learn More &rarr;
+</a>
+
+  {% endif %}
+</div>
+
+<style>
+  .custom-filters-container {
+    text-align: center;
+    padding: 72px;
+    background-color: #f0f8ff;
+  }
+
+  .subtextheading
+  {
+    width: 856px;
+    margin: auto;
+    margin-bottom: 60px;
+  }
+
+  .filter-cards {
+    display: grid;
+    grid-template-columns: repeat(var(--cards-per-row, 3), 1fr);
+    gap: 20px;
+    justify-items: center;
+  }
+
+  .filter-card {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 300px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .filter-card img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px;
+  }
+
+  .learn-more-button {
+    display: inline-block;
+    margin-top: 60px;
+    padding: 10px 20px;
+    background-color: rgba(0, 87, 160, 1);
+    color: #ffffff;
+    border-radius: 5px;
+    text-decoration: none;
+  }
+
+  .learn-more-button:hover {
+    background-color: #0056b3;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Custom Filters",
+  "settings": [
+    {
+      "type": "url",
+      "id": "learn_more_link",
+      "label": "Learn More Link"
+    },
+    {
+      "type": "range",
+      "id": "cards_per_row",
+      "label": "Cards per Row",
+      "min": 1,
+      "max": 5,
+      "default": 3,
+      "step": 1
+    }
+  ],
+  "blocks": [
+    {
+      "type": "filter",
+      "name": "Filter Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Filters",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
